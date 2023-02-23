@@ -1,9 +1,12 @@
 const puppeteer = require('puppeteer');
 
 function init() {
-    let nom = document.getElementById("formNom").value;
+    /* let nom = document.getElementById("formNom").value;
     let numb1 = document.getElementById("formNumb1").value;
-    let numb2 = document.getElementById("formNumb2").value;
+    let numb2 = document.getElementById("formNumb2").value; */
+    let nom = "Kakapo";
+    let numb1 = "8";
+    let numb2 = "2";
     let data = {
         "Nom": nom,
         "Numb1": numb1,
@@ -26,9 +29,9 @@ class AutoFill {
     main() {
         console.log(this.data);
         // Aller chercher le formulaire
-        this.searchFormCible();
         // Le remplir et le soumettre
-        this.fillFormCible();
+        this.searchFormCible();
+        //this.fillFormCible();
         // Recuperer ce qu'il renvoie
         // Afficher le resultat
     }
@@ -43,12 +46,16 @@ class AutoFill {
         // Aller sur la page
         await page.goto('http://localhost/formCible/form.php');
         this.page = page;
+
+        // Remplir le formulaire correspondant
+        this.fillFormCible();
     }
 
     async fillFormCible() {
         // Remplir et spumettre le formulaire
-        await this.page.type('#formNom', 'Kakapo');
-        await this.page.type('#formMail', 'LeBoss');
+        await this.page.type('#formNom', this.data["Nom"]);
+        await this.page.type('#formNumb1', this.data["Numb1"]);
+        await this.page.type('#formNumb2', this.data["Numb2"]);
         await this.page.evaluate(() => {
             document.querySelector('input[value=Envoyer]').click();
         });
