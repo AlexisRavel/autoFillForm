@@ -21,6 +21,7 @@ class AutoFill {
     data
     browser = null;
     page = null;
+    elements = [];
 
     constructor(data) {
         this.data = data;
@@ -53,8 +54,9 @@ class AutoFill {
         });
 
         // Recup les données
-        this.getElement('.titreNom');
-        this.getElement('.calcul');
+        await this.getElement('.titreNom');
+        await this.getElement('.calcul');
+        console.log(this.elements);
         
         await this.browser.close();
     }
@@ -62,8 +64,8 @@ class AutoFill {
     async getElement(resultsSelector) {
         await this.page.waitForSelector(resultsSelector);
         let element = await this.page.$(resultsSelector);
-        let value = await this.page.evaluate(el => el.textContent, element).toString();
-        console.log(value);
+        let value = await this.page.evaluate(el => el.textContent, element);
+        this.elements.push(value);
     }
 }
 
