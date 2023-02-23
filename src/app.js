@@ -38,21 +38,6 @@ server.get("/", function(req, res) {
     readHtml("/index.html", res);
 });
 
-/* server.get('/formCible/formulaire.html', function(req, res) {
-    readHtml("/formCible/formulaire.html", res);
-});
-
-server.post('/formCible/formulaire.html', function(req, res) {
-    nom = req.body.nom;
-    numb1 = parseInt(req.body.numb1);
-    numb2 = parseInt(req.body.numb2);
-
-    titre = "<h1>"+nom+"</h1>";
-    calcul = "<p>"+numb1*numb2+"</p>";
-    html = "<html><head><title>FormCible</title></head><body>"+titre+calcul+"</body></html>";
-    res.send(html);
-}); */
-
 server.get('/form.html', function(req, res) {
     readHtml("/form.html", res);
 });

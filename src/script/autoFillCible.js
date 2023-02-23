@@ -19,39 +19,31 @@ const init = () => {
 
 class AutoFill {
     data
+    browser = null;
     page = null;
 
     constructor(data) {
         this.data = data;
-        this.main();
+        this.searchPage('http://localhost/formulaire.php');
     }
 
-    main() {
-        console.log(this.data);
-        // Aller chercher le formulaire
-        // Le remplir et le soumettre
-        this.searchFormCible();
-        //this.fillFormCible();
-        // Recuperer ce qu'il renvoie
-        // Afficher le resultat
-    }
-
-    async searchFormCible() {
+    async searchPage(url) {
         // Init de puppeteer
         const browser = await puppeteer.launch({
-            headless: false
+            headless: true
         });
+        this.browser = browser;
         const page = await browser.newPage();
 
         // Aller sur la page
-        await page.goto('http://localhost/formulaire.php');
+        await page.goto(url);
         this.page = page;
 
         // Remplir le formulaire correspondant
-        this.fillFormCible();
+        this.fillForm();
     }
 
-    async fillFormCible() {
+    async fillForm() {
         // Remplir et spumettre le formulaire
         await this.page.type('#formNom', this.data["Nom"]);
         await this.page.type('#formNumb1', this.data["Numb1"]);
@@ -59,6 +51,19 @@ class AutoFill {
         await this.page.evaluate(() => {
             document.querySelector('input[value=Envoyer]').click();
         });
+
+        // Recup les données
+        this.getElement('.titreNom');
+        this.getElement('.calcul');
+        
+        await this.browser.close();
+    }
+
+    async getElement(resultsSelector) {
+        await this.page.waitForSelector(resultsSelector);
+        let element = await this.page.$(resultsSelector);
+        let value = await this.page.evaluate(el => el.textContent, element).toString();
+        console.log(value);
     }
 }
 
