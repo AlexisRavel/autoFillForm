@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-function init() {
+const init = () => {
     /* let nom = document.getElementById("formNom").value;
     let numb1 = document.getElementById("formNumb1").value;
     let numb2 = document.getElementById("formNumb2").value; */
@@ -44,7 +44,7 @@ class AutoFill {
         const page = await browser.newPage();
 
         // Aller sur la page
-        await page.goto('http://localhost/formCible/formulaire.html');
+        await page.goto('http://localhost/formulaire.php');
         this.page = page;
 
         // Remplir le formulaire correspondant
@@ -60,4 +60,9 @@ class AutoFill {
             document.querySelector('input[value=Envoyer]').click();
         });
     }
+}
+
+// Export
+module.exports = {
+    init,
 }

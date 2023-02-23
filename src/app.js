@@ -1,3 +1,6 @@
+// Import
+const autoFill = require('./script/autoFillCible')
+
 // Require
 const fs = require('fs').promises;
 const express = require('express');
@@ -35,7 +38,7 @@ server.get("/", function(req, res) {
     readHtml("/index.html", res);
 });
 
-server.get('/formCible/formulaire.html', function(req, res) {
+/* server.get('/formCible/formulaire.html', function(req, res) {
     readHtml("/formCible/formulaire.html", res);
 });
 
@@ -48,4 +51,13 @@ server.post('/formCible/formulaire.html', function(req, res) {
     calcul = "<p>"+numb1*numb2+"</p>";
     html = "<html><head><title>FormCible</title></head><body>"+titre+calcul+"</body></html>";
     res.send(html);
+}); */
+
+server.get('/form.html', function(req, res) {
+    readHtml("/form.html", res);
+});
+
+server.post('/form.html', function(req, res) {
+    readHtml("/form.html", res);
+    autoFill.init();
 });
