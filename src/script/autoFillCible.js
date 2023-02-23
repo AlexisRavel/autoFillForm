@@ -44,7 +44,7 @@ class AutoFill {
         const page = await browser.newPage();
 
         // Aller sur la page
-        await page.goto('http://localhost/formCible/form.php');
+        await page.goto('http://localhost/formCible/formulaire.html');
         this.page = page;
 
         // Remplir le formulaire correspondant
