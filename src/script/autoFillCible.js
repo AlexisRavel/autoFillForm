@@ -1,18 +1,7 @@
 const puppeteer = require('puppeteer');
+//const document = new Document
 
-const init = () => {
-    /* let nom = document.getElementById("formNom").value;
-    let numb1 = document.getElementById("formNumb1").value;
-    let numb2 = document.getElementById("formNumb2").value; */
-    let nom = "Kakapo";
-    let numb1 = "8";
-    let numb2 = "2";
-    let data = {
-        "Nom": nom,
-        "Numb1": numb1,
-        "Numb2": numb2
-    }
-
+const init = (data) => {
     new AutoFill(data);
 }
 
@@ -41,7 +30,7 @@ class AutoFill {
         this.page = page;
 
         // Remplir le formulaire correspondant
-        this.fillForm();
+        await this.fillForm();
     }
 
     async fillForm() {

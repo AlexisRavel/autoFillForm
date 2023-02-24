@@ -44,5 +44,10 @@ server.get('/form.html', function(req, res) {
 
 server.post('/form.html', function(req, res) {
     readHtml("/form.html", res);
-    autoFill.init();
+    let data = {
+        "Nom": req.body.nom,
+        "Numb1": req.body.numb1,
+        "Numb2": req.body.numb2
+    }
+    autoFill.init(data);
 });
