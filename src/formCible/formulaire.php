@@ -24,10 +24,10 @@
         <input type="text" name="nom" id="formNom" required>
 
         <label for="numb1">Chiffre 1: </label>
-        <input type="text" name="numb1" id="formNumb1" required>
+        <input type="number" name="numb1" id="formNumb1" required>
 
         <label for="numb2">Chiffre 2: </label>
-        <input type="text" name="numb2" id="formNumb2" required>
+        <input type="number" name="numb2" id="formNumb2" required>
 
         <input type="submit" value="Envoyer">
     </form>
