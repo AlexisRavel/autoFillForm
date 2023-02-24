@@ -4,8 +4,10 @@ const puppeteer = require('puppeteer');
 
 // -------- MAIN FUNCTIONS --------
 // To launch the entire script
-const init = (data) => {
-    new AutoFill(data);
+const init = async (data) => {
+    autoFill = new AutoFill(data);
+    await autoFill.searchPage('http://localhost/formulaire.php');
+    return autoFill.elements;
 }
 
 // -------- CLASS --------
@@ -18,7 +20,6 @@ class AutoFill {
 
     constructor(data) {
         this.data = data;
-        this.searchPage('http://localhost/formulaire.php');
     }
 
     // Take the URL wants, puppeteer go on it
@@ -50,7 +51,6 @@ class AutoFill {
         // Get data that we search for
         await this.getElement('.titreNom');
         await this.getElement('.calcul');
-        console.log(this.elements);
         
         // Close website for puppeteer
         await this.browser.close();
